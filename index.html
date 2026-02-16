@@ -3,108 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Srikanth Birthday Countdown 💕</title>
+<title>Happy Birthday Srikanth ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg,#ffd6e8,#d6f5ff,#fbe7c6);
+  overflow-x: hidden;
 }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ffd6e8, #d6f0ff, #fff5cc);
-    overflow-x: hidden;
+/* Floating hearts */
+.heart {
+  position: fixed;
+  color: #ff6fa5;
+  animation: float 6s linear infinite;
+  font-size: 20px;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 .container {
-    padding: 20px;
-    margin-top: 40px;
+  padding: 20px;
+  margin-top: 40px;
 }
 
 h1 {
-    font-size: 22px;
-    color: #ff4d88;
+  font-size: 28px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { color: #ff4da6; }
+  to { color: #ff1493; }
 }
 
 #countdown {
-    font-size: 18px;
-    background: #ffffffcc;
-    padding: 15px;
-    border-radius: 20px;
-    margin: 20px auto;
-    max-width: 320px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.question {
-    margin-top: 30px;
-    font-size: 18px;
-}
-
-.button-group {
-    margin-top: 20px;
-    position: relative;
-    height: 80px;
+  font-size: 20px;
+  margin: 20px 0;
+  font-weight: bold;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    position: absolute;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.yes-btn {
-    background: #b5ead7;
-    left: 20%;
+.yes {
+  background-color: #a0e7e5;
 }
 
-.no-btn {
-    background: #ffb7b2;
-    right: 20%;
+.no {
+  background-color: #ffb7b2;
+}
+
+button:hover {
+  transform: scale(1.1);
 }
 
 #response {
-    margin-top: 20px;
-    font-size: 18px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-#finalMessage {
-    font-size: 22px;
-    margin-top: 25px;
-    color: #ff1493;
-    display: none;
+.final-love {
+  margin-top: 40px;
+  font-size: 24px;
+  color: #ff1493;
+  animation: pulse 2s infinite;
 }
 
-/* Floating Hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    animation: floatUp 6s linear infinite;
-}
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-700px); opacity: 0; }
-}
-
-/* Birthday Popup */
-#popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(255,105,180,0.95);
-    color: white;
-    font-size: 22px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 </style>
 </head>
@@ -113,101 +95,72 @@ button {
 
 <!-- Auto Background Music -->
 <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b3e6c.mp3?filename=sweet-love-ambient-11077.mp3" type="audio/mp3">
+  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
 </audio>
 
 <div class="container">
+  <h1>🎉 Happy Birthday Srikanth ❤️</h1>
+  
+  <div id="countdown"></div>
 
-    <h1>🎂 Countdown to Srikanth's Birthday (Feb 26) 💖</h1>
+  <h3>Do you love me? 💖</h3>
+  <button class="yes" onclick="loveYes()">Yes 😍</button>
+  <button class="no" onclick="loveNo()">No 😒</button>
 
-    <div id="countdown"></div>
+  <div id="response"></div>
 
-    <div class="question">Do you love me? 🥺💘</div>
-
-    <div class="button-group">
-        <button class="yes-btn" onclick="loveYes()">Yes 💕</button>
-        <button class="no-btn" id="noBtn">No 😜</button>
-    </div>
-
-    <div id="response"></div>
-    <div id="finalMessage">💖 I Love You Srikanth Forever & Ever 😘🌸✨</div>
-
-</div>
-
-<div id="popup">
-    🎉 Happy Birthday My Love Srikanth 😘🎂💖 <br><br>
-    You are my forever & always 🌙✨ <br><br>
-    💕 I LOVE YOU 💕
+  <div class="final-love">I Love You Ammu 💕</div>
 </div>
 
 <script>
-
 // Countdown
-function updateCountdown() {
-    const now = new Date();
-    let year = now.getFullYear();
-    let birthday = new Date(year, 1, 26, 0, 0, 0);
+const birthday = new Date("Feb 26, 2026 00:00:00").getTime();
 
-    if (now > birthday) {
-        birthday = new Date(year + 1, 1, 26, 0, 0, 0);
-    }
+setInterval(function() {
+  const now = new Date().getTime();
+  const distance = birthday - now;
 
-    const diff = birthday - now;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+  document.getElementById("countdown").innerHTML =
+    "⏳ " + days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
 
-    document.getElementById("countdown").innerHTML =
-        days + " Days 💕 " +
-        hours + " Hours 🌸 " +
-        minutes + " Minutes 💖 " +
-        seconds + " Seconds ✨";
+  if (distance < 0) {
+    document.getElementById("countdown").innerHTML = "🎂 It's His Birthday Today!";
+  }
+}, 1000);
 
-    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-        document.getElementById("popup").style.display = "flex";
-    }
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// Yes Button
+// Yes / No
 function loveYes() {
-    document.getElementById("response").innerHTML =
-        "Awww 🥰💞 I promise I'll never sleep before you 😘🌙💕";
-    document.getElementById("response").style.color = "#00b894";
-    document.getElementById("finalMessage").style.display = "block";
+  document.getElementById("response").innerHTML =
+  "🥰 I promise you I'll never sleep before you ❤️✨";
 }
 
-// No Button Moves (Mobile Friendly)
-const noBtn = document.getElementById("noBtn");
-
-noBtn.addEventListener("touchstart", moveButton);
-noBtn.addEventListener("mouseover", moveButton);
-
-function moveButton() {
-    const maxX = window.innerWidth - 100;
-    const maxY = window.innerHeight - 100;
-
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
+function loveNo() {
+  document.getElementById("response").innerHTML =
+  "😡 I hate you 😤💔 (Just kidding... I still love you 😘)";
 }
 
 // Floating Hearts
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 15 + 15 + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 700);
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.body.appendChild(heart);
 
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 300);
 </script>
 
 </body>
 </html>
-
