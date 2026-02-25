@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My King ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Georgia, serif;
+background:linear-gradient(135deg,#d9c2ff,#ffd6c2);
+color:#4b2e2e;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* Password Screen */
+#lock{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#c8a2ff,#ffccbb);
+}
+
+input{
+padding:10px;
+border-radius:20px;
+border:none;
+margin-top:10px;
+text-align:center;
+}
+
+button{
+padding:10px 20px;
+margin-top:15px;
+border:none;
+border-radius:25px;
+background:#fff0f5;
+font-size:16px;
+cursor:pointer;
+}
+
+.hint{
+font-size:14px;
+margin-top:10px;
+opacity:0.8;
+}
+
+/* Envelope */
+.envelope-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.envelope{
+width:260px;
+height:170px;
+background:#ffe5ec;
+position:relative;
+border-radius:10px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.flap{
+position:absolute;
+width:0;
+height:0;
+border-left:130px solid transparent;
+border-right:130px solid transparent;
+border-bottom:95px solid #ffc2d1;
+top:-95px;
+transition:1s;
+transform-origin:bottom;
+}
+
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
+.section{
+display:none;
+min-height:100vh;
+padding:40px 20px;
+animation:fade 1.5s ease;
+}
+
+.active{display:block;}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+img{
+width:100%;
+max-width:500px;
+border-radius:15px;
+margin-top:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Wedding */
+.wedding{
+background:#fff0f6;
+padding:40px 20px;
+border-radius:20px;
+border:3px solid #e6a4b4;
+max-width:600px;
+margin:auto;
+}
+
+/* Petals */
+.petal{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+background:#ffb6c1;
+border-radius:50%;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(100vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PASSWORD -->
+<div id="lock">
+<h2>Enter Password 💜</h2>
+<input type="password" id="pass">
+<button onclick="checkPass()">Unlock</button>
+<div class="hint">Hint: What I lovingly call you... 💕</div>
+</div>
+
+<!-- ENVELOPE -->
+<div class="envelope-container" id="cover" style="display:none;">
+<div class="envelope" onclick="openEnvelope(this)">
+<div class="flap"></div>
+</div>
+</div>
+
+<!-- CONTENT -->
+<div id="content" style="display:none;">
+
+<div class="section active" id="s1">
+<h2>My Dearest Bava ❤️</h2>
+<p>
+Nuvvu naa jeevitham lo ochinappudu naa prapancham maripoyindi.  
+Naa smile ki reason nuvve.  
+Naa heart ki shanti nuvve.  
+In this lifetime, I found my forever in you.
+</p>
+<button onclick="next(2)">Continue</button>
+</div>
+
+<div class="section" id="s2">
+<h3>What do you like most in me? 💖</h3>
+<button onclick="next(3)">My Smile</button>
+<button onclick="next(3)">My Caring</button>
+<button onclick="next(3)">Everything About Me</button>
+<img src="image3.jpeg">
+</div>
+
+<div class="section" id="s3">
+<h3>If you're hungry... what will you eat first? 😌</h3>
+<button onclick="next(4)">ME😘</button>
+<button onclick="next(4)">Food 🍕</button>
+<img src="image2.jpeg">
+</div>
+<div class="section" id="s4">
+    <p> what is the most memorable moment?</p>
+    <p> you should  send me through text........ you know my numbr na?</p>
+    <button onclick="next(5)">sent</button>
+</div>
+<div class="section" id="s5">
+<h1>🎉 Happy Birthday My King 🎂</h1>
+<p>May your life shine brighter than gold.</p>
+<img src="image1.jpeg">
+<button onclick="next(6)">Final Surprise</button>
+</div>
+
+<div class="section" id="s6">
+<div class="wedding">
+<h2>Paidi's Wedding Invitation 💍</h2>
+<h3>Srikanth 🤍 Anusha</h3>
+<p>
+With divine blessings and love,  
+Two souls unite in eternal bond.
+</p>
+<p>Save The Date 💕</p>
+<p> I Love You So Much Bava</p>
+</div>
+</div>
+
+</div>
+
+<script>
+/* Petals */
+for(let i=0;i<20;i++){
+let p=document.createElement("div");
+p.className="petal";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(p);
+}
+
+/* Password */
+function checkPass(){
+if(document.getElementById("pass").value==="ammu"){
+document.getElementById("lock").style.display="none";
+document.getElementById("cover").style.display="flex";
+}else{
+alert("Wrong Password 💔");
+}
+}
+
+function openEnvelope(el){
+el.classList.add("open");
+setTimeout(function(){
+document.getElementById("cover").style.display="none";
+document.getElementById("content").style.display="block";
+},1000);
+}
+
+function next(num){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById("s"+num).classList.add("active");
+window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
