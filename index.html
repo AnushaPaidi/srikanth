@@ -1,165 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Advance Happy Birthday Srikanth ❤️</title>
+<title>For My King ❤️</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  background: linear-gradient(135deg,#ffd6e8,#d6f5ff,#fbe7c6);
-  overflow-x: hidden;
+body{
+margin:0;
+font-family:Georgia, serif;
+background:linear-gradient(135deg,#d9c2ff,#ffd6c2);
+color:#4b2e2e;
+text-align:center;
+overflow-x:hidden;
 }
 
-/* Floating hearts */
-.heart {
-  position: fixed;
-  color: #ff6fa5;
-  animation: float 6s linear infinite;
-  font-size: 20px;
+/* Password Screen */
+#lock{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#c8a2ff,#ffccbb);
 }
 
-@keyframes float {
-  0% { transform: translateY(100vh); opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+input{
+padding:10px;
+border-radius:20px;
+border:none;
+margin-top:10px;
+text-align:center;
 }
 
-.container {
-  padding: 20px;
-  margin-top: 40px;
+button{
+padding:10px 20px;
+margin-top:15px;
+border:none;
+border-radius:25px;
+background:#fff0f5;
+font-size:16px;
+cursor:pointer;
 }
 
-h1 {
-  font-size: 28px;
-  animation: glow 2s infinite alternate;
+.hint{
+font-size:14px;
+margin-top:10px;
+opacity:0.8;
 }
 
-@keyframes glow {
-  from { color: #ff4da6; }
-  to { color: #ff1493; }
+/* Envelope */
+.envelope-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-#countdown {
-  font-size: 20px;
-  margin: 20px 0;
-  font-weight: bold;
+.envelope{
+width:260px;
+height:170px;
+background:#ffe5ec;
+position:relative;
+border-radius:10px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+.flap{
+position:absolute;
+width:0;
+height:0;
+border-left:130px solid transparent;
+border-right:130px solid transparent;
+border-bottom:95px solid #ffc2d1;
+top:-95px;
+transition:1s;
+transform-origin:bottom;
 }
 
-.yes {
-  background-color: #a0e7e5;
+.envelope.open .flap{
+transform:rotateX(180deg);
 }
 
-.no {
-  background-color: #ffb7b2;
+.section{
+display:none;
+min-height:100vh;
+padding:40px 20px;
+animation:fade 1.5s ease;
 }
 
-button:hover {
-  transform: scale(1.1);
+.active{display:block;}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
-#response {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
+img{
+width:100%;
+max-width:500px;
+border-radius:15px;
+margin-top:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-.final-love {
-  margin-top: 40px;
-  font-size: 24px;
-  color: #ff1493;
-  animation: pulse 2s infinite;
+/* Wedding */
+.wedding{
+background:#fff0f6;
+padding:40px 20px;
+border-radius:20px;
+border:3px solid #e6a4b4;
+max-width:600px;
+margin:auto;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+/* Petals */
+.petal{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+background:#ffb6c1;
+border-radius:50%;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(100vh);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Auto Background Music -->
+<!-- MUSIC -->
 <audio autoplay loop>
-  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
-  <h1>🎉 Advance Happy Birthday Srikanth ❤️</h1>
-  
-  <div id="countdown"></div>
+<!-- PASSWORD -->
+<div id="lock">
+<h2>Enter Password 💜</h2>
+<input type="password" id="pass">
+<button onclick="checkPass()">Unlock</button>
+<div class="hint">Hint: What I lovingly call you... 💕</div>
+</div>
 
-  <h3>Do you love me? 💖</h3>
-  <button class="yes" onclick="loveYes()">Yes 😍</button>
-  <button class="no" onclick="loveNo()">No 😒</button>
+<!-- ENVELOPE -->
+<div class="envelope-container" id="cover" style="display:none;">
+<div class="envelope" onclick="openEnvelope(this)">
+<div class="flap"></div>
+</div>
+</div>
 
-  <div id="response"></div>
+<!-- CONTENT -->
+<div id="content" style="display:none;">
 
-  <div class="final-love">I Love You Ammu 💕</div>
+<div class="section active" id="s1">
+<h2>My Dearest Bava ❤️</h2>
+<p>
+Nuvvu naa jeevitham lo ochinappudu naa prapancham maripoyindi.  
+Naa smile ki reason nuvve.  
+Naa heart ki shanti nuvve.  
+In this lifetime, I found my forever in you.
+</p>
+<button onclick="next(2)">Continue</button>
+</div>
+
+<div class="section" id="s2">
+<h3>What do you like most in me? 💖</h3>
+<button onclick="next(3)">My Smile</button>
+<button onclick="next(3)">My Caring</button>
+<button onclick="next(3)">Everything About Me</button>
+<img src="image3.jpeg">
+</div>
+
+<div class="section" id="s3">
+<h3>If you're hungry... what will you eat first? 😌</h3>
+<button onclick="next(4)">ME😘</button>
+<button onclick="next(4)">Food 🍕</button>
+<img src="image2.jpeg">
+</div>
+<div class="section" id="s4">
+    <p> what is the most memorable moment?</p>
+    <p> you should  send me through text........ you know my numbr na?</p>
+    <button onclick="next(5)">sent</button>
+</div>
+<div class="section" id="s5">
+<h1>🎉 Happy Birthday My King 🎂</h1>
+<p>May your life shine brighter than gold.</p>
+<img src="image1.jpeg">
+<button onclick="next(6)">Final Surprise</button>
+</div>
+
+<div class="section" id="s6">
+<div class="wedding">
+<h2>Paidi's Wedding Invitation 💍</h2>
+<h3>Srikanth 🤍 Anusha</h3>
+<p>
+With divine blessings and love,  
+Two souls unite in eternal bond.
+</p>
+<p>Save The Date 💕</p>
+<p> I Love You So Much Bava</p>
+</div>
+</div>
+
 </div>
 
 <script>
-// Countdown
-const birthday = new Date("Feb 26, 2026 00:00:00").getTime();
-
-setInterval(function() {
-  const now = new Date().getTime();
-  const distance = birthday - now;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("countdown").innerHTML =
-    "⏳ " + days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-  if (distance < 0) {
-    document.getElementById("countdown").innerHTML = "🎂 It's His Birthday Today!";
-  }
-}, 1000);
-
-// Yes / No
-function loveYes() {
-  document.getElementById("response").innerHTML =
-  "🥰 I promise you I'll never sleep before you ❤️✨";
+/* Petals */
+for(let i=0;i<20;i++){
+let p=document.createElement("div");
+p.className="petal";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(p);
 }
 
-function loveNo() {
-  document.getElementById("response").innerHTML =
-  "😡 I hate you 😤💔 (Just kidding... I still love you 😘)";
+/* Password */
+function checkPass(){
+if(document.getElementById("pass").value==="ammu"){
+document.getElementById("lock").style.display="none";
+document.getElementById("cover").style.display="flex";
+}else{
+alert("Wrong Password 💔");
+}
 }
 
-// Floating Hearts
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
+function openEnvelope(el){
+el.classList.add("open");
+setTimeout(function(){
+document.getElementById("cover").style.display="none";
+document.getElementById("content").style.display="block";
+},1000);
 }
 
-setInterval(createHeart, 300);
+function next(num){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById("s"+num).classList.add("active");
+window.scrollTo(0,0);
+}
 </script>
 
 </body>
